@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+<style>
+div.answer {
+    float: left;
+    cursor: pointer;
+    height: 70px;
+    width: 250px;
+    margin-left: 40px;
+    border-top: 4px solid #75c2eb;
+    border-bottom: 4px solid #75c2eb;
+    position: relative;
+    text-align: center;
+    color: white;
+    line-height: 70px;
+    font-size: 21px;
+    font-family: sans-serif;
+    background-color:black;
+
+}
+div.answer:before, div.answer:after {
+    content:'';
+    position: absolute;
+    top: 13px;
+    height: 40px;
+    width: 40px;
+    border: 4px solid #75c2eb;
+    -webkit-transform: scale(0.8,1.25) rotate(45deg);
+    -moz-transform: scale(0.8,1.25) rotate(45deg);
+    -ms-transform: scale(0.8,1.25) rotate(45deg);
+    transform: scale(0.8,1.25) rotate(45deg);
+    background-color:black;
+  
+}
+div.answer:before {
+    left: -22px;
+    border-top: 0px solid transparent;
+    border-right: 0px solid transparent;
+}
+div.answer:after {
+    right: -22px;
+    border-bottom: 0px solid transparent;
+    border-left: 0px solid transparent;
+  
+  
+}
+div.answer:not(.w):hover, div.answer:not(.w):hover:before, div.answer:not(.w):hover:after, div.answer:not(.w):hover .letter {
+    background-color: #f5ae26;
+    color: white;
+}
+
+div.chosenAnswer:before,div.chosenAnswer:after {
+    content:'';
+    position: absolute;
+    top: 13px;
+    height: 40px;
+    width: 40px;
+    border: 4px solid #75c2eb;
+    -webkit-transform: scale(0.8,1.25) rotate(45deg);
+    -moz-transform: scale(0.8,1.25) rotate(45deg);
+    -ms-transform: scale(0.8,1.25) rotate(45deg);
+    transform: scale(0.8,1.25) rotate(45deg);
+    background-color:#f5ae26;
+  }
+  
+  div.chosenAnswer{    float: left;
+    cursor: default;
+    height: 70px;
+    width: 250px;
+    margin-left: 40px;
+    border-top: 4px solid #75c2eb;
+    border-bottom: 4px solid #75c2eb;
+    position: relative;
+    text-align: center;
+    color: white;
+    line-height: 70px;
+    font-size: 21px;
+    font-family: sans-serif;
+    background-color: #f5ae26;
+    
+}
+
+
+div.correctAnswer:before,div.correctAnswer:after {
+    content:'';
+    position: absolute;
+    top: 13px;
+    height: 40px;
+    width: 40px;
+    border: 4px solid #75c2eb;
+    -webkit-transform: scale(0.8,1.25) rotate(45deg);
+    -moz-transform: scale(0.8,1.25) rotate(45deg);
+    -ms-transform: scale(0.8,1.25) rotate(45deg);
+    transform: scale(0.8,1.25) rotate(45deg);
+    background-color:#66FF66;
+  }
+  
+  div.correctAnswer{    float: left;
+    cursor: default;
+    height: 70px;
+    width: 250px;
+    margin-left: 40px;
+    border-top: 4px solid #75c2eb;
+    border-bottom: 4px solid #75c2eb;
+    position: relative;
+    text-align: center;
+    color: white;
+    line-height: 70px;
+    font-size: 21px;
+    font-family: sans-serif;
+    background-color: #66FF66;
+    
+}
+
+
+@-webkit-keyframes example {
+    from {background-color: red;}
+    to {background-color: yellow;}
+}
+
+div.chosenAnswer:before {
+    left: -22px;
+    border-top: 0px solid transparent;
+    border-right: 0px solid transparent;
+}
+div.chosenAnswer:after {
+    right: -22px;
+    border-bottom: 0px solid transparent;
+    border-left: 0px solid transparent;
+  
+  
+}
+div.correctAnswer:before {
+    left: -22px;
+    border-top: 0px solid transparent;
+    border-right: 0px solid transparent;
+}
+div.correctAnswer:after {
+    right: -22px;
+    border-bottom: 0px solid transparent;
+    border-left: 0px solid transparent;
+  
+  
+}
+div.chosenAnswer .letter,div.correctAnswer .letter{color:white}
+
+span{
+  text-align:left;
+  margin-left:2em;
+  display:block;
+  font-size:.75em;
+
+}
+span.letter{
+  position: relative;
+  float:left;
+  color: #f08738;
+  margin-left:0;
+  font-size:1em;
+}
+div.line {
+ 
+  height: 4px;
+  width:100%;
+  background: #75c2eb;position:relative;
+  
+  top:97px;
+ 
+}
+
+
+body{
+  background: linear-gradient(#000066,#000000);
+   height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+html{height:100%;}
+
+ul.q {margin-left:0 auto; width:900px}
+ul.q li {margin-left:10%;float:left;margin-top:40px;display:block}
+ul.quest span {text-align:center;font-size:.75em;}
+ul {color:white;font-family:sans-serif;list-style:none}
+
+
+div.w{cursor:default;}
+
+div.wide{width:635px;
+  line-height:25px;
+  cursor:default;
+ }
+ 
+span.info {color:white;font-family:sans-serif;font-size:2em;text-align:center}
+
+div.questionBox span{margin-left:1em;margin-right:1em;margin-top:.5em;font-size:1em;   z-index:1;}
+
+
+
+</style>
+
+ <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+
+    
+  <script src="http://www.javascriptoo.com/application/html/js/goldfire/howler.js/howler.min.js"></script>
+ <script> 
+  var spData = null;
+  function doData(json) {
+      spData = json.feed.entry;
+   // console.log(spData);
+    
+    var questions = [];
+    var curQuestion = -1;
+    for(i=0;i<spData.length;i++){
+      
+      if(i%6==0){
+        curQuestion++;
+        questions[curQuestion] = new Array(6);
+        }
+      
+      
+      row = spData[i]['gs$cell']['row']-1;
+      curColumn = spData[i]['gs$cell']['col']-1;
+      cellData = spData[i]['gs$cell']['$t'];
+      
+      questions[curQuestion][curColumn] = cellData;
+      
+    }
+   
+    initGame(questions);
+    
+  }
+   
+  var globalQuestions = [];
+   var canTakeMoney = true;
+  var amountsEnglish = ['absolutely nothing','£100','£200','£300','£500','£1,000','£2,000','£4,000','£8,000','£16,000','£32,000','£64,000','£125,000','£250,000','£500,000','£1,000,000'];
+  var amountsLoss = ['£1000','£3000','£7,000','£15,000','na','£32,000','£93,000','£218,000','£468,000'];
+  var currentQuestionLevel = 1;  
+  function initGame(q){
+      globalQuestions = q;
+      sounds['startgame'].play();
+ // sayQuestion(1337);
+
+    
+  }
+  
+  function getNewQuestionNumber(level){
+  //level is value 1 to 15, in my questions spreadsheet I have 201 for each level roughly
+  var n = Math.floor((Math.random() * 201) + 1);
+  questionNum = (level-1)*201 + n;
+
+  
+  }
+  
+  var questionNum = 0;
+
+  function sayQuestion() {
+
+    document.getElementById('info').innerText = "Question number " + currentQuestionLevel + " for " + amountsEnglish[currentQuestionLevel];
+    
+    options = new Array(4);
+    for(var i = 0; i<4;i++){options[i] = globalQuestions[questionNum][i+1];
+    }
+    options = shuffleArray(options);
+
+    document.getElementById('a').innerText = options[0];
+    document.getElementById('b').innerText = options[1];
+    document.getElementById('c').innerText = options[2];
+    document.getElementById('d').innerText = options[3];
+      document.getElementById('quest').innerText = globalQuestions[questionNum][0];
+      
+      
+ var line1 = globalQuestions[questionNum][0];
+ var line2 = "Is it A: " + options[0] + ", B: " + options[1] + ", C: " + options[2] + ", or D: " + options[3] + ".";
+responsiveVoice.speak(line1, "UK English Male", {volume: 1,pitch:1.3,rate:0.85});
+   responsiveVoice.speak(line2, "UK English Male", {volume: 1,pitch:1.3,rate:0.85}); 
+ 
+    
+  }
+   //3015 questions, 201 of each category
+   
+  function startGame(){
+  sounds['startgame'].stop();
+  sounds['level1loop'].play();
+  document.getElementById('start').style.display = 'none';
+  document.getElementById('game').style.display = 'block';
+  currentQuestionLevel = 1;
+  getNewQuestionNumber(currentQuestionLevel);
+      sayQuestion(questionNum);
+  } 
+  
+  
+  
+  function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+
+var questionLockedIn = false;
+
+function selectAnswer(n) {
+ 
+if(questionLockedIn==false){
+  
+  sounds['lockedin'].play();
+questionLockedIn = true;
+canTakeMoney = false;
+document.getElementById('a').parentNode.className+= ' w';
+document.getElementById('b').parentNode.className+= ' w';
+document.getElementById('c').parentNode.className+= ' w';
+document.getElementById('d').parentNode.className+= ' w';
+opts = ['a','b','c','d'];
+document.getElementById(opts[n]).parentNode.className = 'chosenAnswer';
+
+
+
+setTimeout(revealCorrectAnswer,3000);
+}
+}
+   
+   function revealCorrectAnswer(){
+   	var qId = "";
+   for(var i = 0;i<4;i++){
+      if(globalQuestions[questionNum][5]==options[i]){
+      qId = opts[i];
+      
+      }
+   }
+
+  if(document.getElementById(qId).parentNode.className == 'chosenAnswer'){
+     if(currentQuestionLevel>=1 && currentQuestionLevel <=5){delay = 4000; str='level1correct';}
+      if(currentQuestionLevel>=6 && currentQuestionLevel <=10){delay = 4000; str='level2correct';}
+         if(currentQuestionLevel>=11 && currentQuestionLevel <=14){delay = 5000; str='level3correct';}
+     if(currentQuestionLevel==15){str='millionaire';delay = 3000;sounds['level3loop'].stop();document.getElementById('info').innerText = "You just won £1,000,000!";
+}
+     setTimeout(onCorrectAnswer,delay);
+     sounds[str].play();
+        
+   
+   
+   
+  }
+   else{
+onWrongAnswer();sounds['incorrect'].play();
+}
+   document.getElementById(qId).parentNode.className = 'correctAnswer'; 
+
+
+   
+   
+   }
+   
+   function onCorrectAnswer(){
+   
+   currentQuestionLevel++;
+if(currentQuestionLevel==16){return;}
+   
+   var delay = 0;
+   if(currentQuestionLevel>=6 && currentQuestionLevel <= 10){
+     sounds['newquestionlevel2'].play();
+     sounds['level1loop'].stop();
+     delay = 4000;}
+   if(currentQuestionLevel>=11 && currentQuestionLevel <= 15){
+     sounds['newquestionlevel3'].play();
+     sounds['level2loop'].stop();
+     delay = 4000;}
+  
+   setTimeout(function(){
+       canTakeMoney = true;
+  document.getElementById('a').parentNode.className = 'answer';
+	document.getElementById('b').parentNode.className = 'answer';
+	document.getElementById('c').parentNode.className = 'answer';
+	document.getElementById('d').parentNode.className = 'answer';
+   getNewQuestionNumber(currentQuestionLevel);
+   sayQuestion();
+   questionLockedIn = false;
+   if(currentQuestionLevel==6){sounds['level2loop'].play();}
+     if(currentQuestionLevel==11){sounds['level3loop'].play();}
+   },delay);
+   
+   }
+   function onWrongAnswer(){
+     canTakeMoney = false;
+   sounds['level1loop'].stop();
+   sounds['level2loop'].stop();
+   sounds['level3loop'].stop();
+   setTimeout(function(){sounds['playerlose'].play();},4000);
+     var amount = 0;
+     if(currentQuestionLevel>5){amount = 5;}
+      if(currentQuestionLevel>10){amount = 10;}
+  document.getElementById('info').innerText = 'You answered incorrectly and went home with ' + amountsEnglish[amount] +'!';
+     if(currentQuestionLevel>6 && currentQuestionLevel !== 11){
+      document.getElementById('info').innerText = 'You just lost ' + amountsLoss[currentQuestionLevel-7] +' and go home with only ' + amountsEnglish[amount] +'!';
+ 
+     }
+   }
+   
+   function takeMoney() {
+	if(currentQuestionLevel==16){window.location = 'http://britishnotes.co.uk/news_and_info/features/millionpoundnote/1_000_000__jn.jpg';}
+     if(canTakeMoney){
+       canTakeMoney = false;
+     questionLockedIn=true;
+     sounds['level1loop'].stop();
+   sounds['level2loop'].stop();
+   sounds['level3loop'].stop();
+     
+     setTimeout(function(){sounds['playertakemoney'].play();},0);
+
+     document.getElementById('info').innerText = 'You took the money and went home with ' + amountsEnglish[currentQuestionLevel-1] +'!';
+     
+     
+     }
+     
+   }
+   
+   var sounds = [];
+    sounds['level1correct']  = new Howl({urls: ['http://static.mezgrman.de/downloads/wwm/richtig_stufe_1.mp3']});
+   
+    sounds['level2correct']  = new Howl({urls: ['http://static.mezgrman.de/downloads/wwm/richtig_stufe_2.mp3']});
+   
+    sounds['level3correct']  = new Howl({urls: ['http://static.mezgrman.de/downloads/wwm/richtig_stufe_3.mp3']});
+    sounds['lockedin']  = new Howl({urls: ['http://static.mezgrman.de/downloads/wwm/eingeloggt_start.mp3']});  
+    sounds['incorrect']  = new Howl({urls: ['http://static.mezgrman.de/downloads/wwm/falsch.mp3']});
+   
+   sounds['startgame'] = new Howl({urls: ['http://static.mezgrman.de/downloads/wwm/auswahlrunde_kandidatwahl_1.mp3']});
+   sounds['level1loop'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/stufe_1.mp3'],loop:true});
+     sounds['level2loop'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/stufe_2.mp3'],loop:true});
+     sounds['level3loop'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/stufe_3.mp3'],loop:true});
+   sounds['playerlose'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/spielende.mp3']});
+   
+    sounds['playertakemoney'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/spielende_kandidat_geht.mp3']});
+   
+   sounds['newquestionlevel2'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/wechsel_nach_stufe_2.mp3']});
+    sounds['newquestionlevel3'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/wechsel_nach_stufe_3.mp3']});
+   sounds['millionaire'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/richtig_millionenfrage.mp3']});
+  </script> 
+ 
+  
+  
+  <script src="https://spreadsheets.google.com/feeds/cells/18tbEhnV0B6nNoPY6gRqUkF6ydgZD0dafZW4Y770BtnI/1/public/values?alt=json-in-script&callback=doData&t=123"></script>
+<style></style>
+
+
+<div id='start'>
+
+<button type="button" style="font-size:80px" onclick=startGame()>Play</button>
+
+</div>
+<div id='game' style="display:none">
+
+  <ul>
+  <li>£1,000,000
+     <hr style="width:15px;float:left;">
+  <li>£500,000
+  <li>£250,000
+  <li>£125,000
+  <li>£64,000
+  <li>£32,000
+         <hr style="width:15px;float:left;">
+  <li>£16,000
+  <li>£8,000
+  <li>£4,000
+  <li>£2,000
+  <li>£1,000
+   <hr style="width:15px;float:left;"> 
+  <li>£500
+  <li>£300
+  <li>£200
+  <li>£100
+  <li>£0
+  </ul>
+  <br>
+ <div style="text-align:center"> <span id='info' class = "info"></span><button type="button" onclick=takeMoney() style="width:250px;height:45px;font-size:30px;">Take the money</button></div>
+    <div class="line"></div>
+  
+  <ul class="q quest" style="margin-left:auto;margin-right:auto">
+
+  <li><div class = "answer questionBox wide w"><span id='quest'></span></div></ul>
+  
+  <div class="line" style="top:195px"></div>
+  
+  <ul class="q" style="margin-left:auto;margin-right:auto">
+    
+  <li><div class="answer" onclick=selectAnswer(0)><span class="letter" >A: </span><span id='a'></span></div>
+    
+  <li><div class="answer" onclick=selectAnswer(1)><span class="letter">B: </span><span id='b'></span></div>
+  
+  </ul>
+   <div class="line" style="top:293px"></div>
+ <ul class="q" style="margin-left:auto;margin-right:auto"><li><div class="answer" onclick=selectAnswer(2)><span class="letter">C: </span><span id='c'></span></div>
+ 
+   <li><div class="answer" onclick=selectAnswer(3)><span class="letter">D: </span><span id='d'></span></div></ul>
+  
+  
+</div>  
+</body>
+</html>
+
+
+
+
+
+
+
+
