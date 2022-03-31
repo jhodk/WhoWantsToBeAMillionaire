@@ -210,7 +210,7 @@ div.questionBox span{margin-left:1em;margin-right:1em;margin-top:.5em;font-size:
  <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
 
     
-  <script src="https://raw.githubusercontent.com/goldfire/howler.js/master/dist/howler.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
  <script> 
   var spData = null;
   function doData(json) {
@@ -427,25 +427,25 @@ if(currentQuestionLevel==16){return;}
    }
    
    var sounds = [];
-    sounds['level1correct']  = new Howl({urls: ['http://static.mezgrman.de/downloads/wwm/richtig_stufe_1.mp3']});
+    sounds['level1correct']  = new Howl({src: ['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/lvl1_correct.mp3?raw=true']});
+
+    sounds['level2correct']  = new Howl({src: ['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/lvl2_correct.mp3?raw=true']});
    
-    sounds['level2correct']  = new Howl({urls: ['http://static.mezgrman.de/downloads/wwm/richtig_stufe_2.mp3']});
+    sounds['level3correct']  = new Howl({src: ['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/lvl3_correct.mp3?raw=true']});
+    sounds['lockedin']  = new Howl({src: ['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/lockedin_start.mp3?raw=true']});  
+    sounds['incorrect']  = new Howl({src: ['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/wrong.mp3?raw=true']});
    
-    sounds['level3correct']  = new Howl({urls: ['http://static.mezgrman.de/downloads/wwm/richtig_stufe_3.mp3']});
-    sounds['lockedin']  = new Howl({urls: ['http://static.mezgrman.de/downloads/wwm/eingeloggt_start.mp3']});  
-    sounds['incorrect']  = new Howl({urls: ['http://static.mezgrman.de/downloads/wwm/falsch.mp3']});
+   sounds['startgame'] = new Howl({src: ['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/intro.mp3?raw=true']});
+   sounds['level1loop'] = new Howl({src:['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/level_1.mp3?raw=true'],loop:true});
+     sounds['level2loop'] = new Howl({src:['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/level_2.mp3?raw=true'],loop:true});
+     sounds['level3loop'] = new Howl({src:['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/level_3.mp3?raw=true'],loop:true});
+   sounds['playerlose'] = new Howl({src:['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/end.mp3?raw=true']});
    
-   sounds['startgame'] = new Howl({urls: ['http://static.mezgrman.de/downloads/wwm/auswahlrunde_kandidatwahl_1.mp3']});
-   sounds['level1loop'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/stufe_1.mp3'],loop:true});
-     sounds['level2loop'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/stufe_2.mp3'],loop:true});
-     sounds['level3loop'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/stufe_3.mp3'],loop:true});
-   sounds['playerlose'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/spielende.mp3']});
+    sounds['playertakemoney'] = new Howl({src:['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/end.mp3?raw=true3']});
    
-    sounds['playertakemoney'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/spielende_kandidat_geht.mp3']});
-   
-   sounds['newquestionlevel2'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/wechsel_nach_stufe_2.mp3']});
-    sounds['newquestionlevel3'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/wechsel_nach_stufe_3.mp3']});
-   sounds['millionaire'] = new Howl({urls:['http://static.mezgrman.de/downloads/wwm/richtig_millionenfrage.mp3']});
+   sounds['newquestionlevel2'] = new Howl({src:['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/before_level_2.mp3?raw=true']});
+    sounds['newquestionlevel3'] = new Howl({src:['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/before_level_3.mp3?raw=true']});
+   sounds['millionaire'] = new Howl({src:['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/lvl4_correct.mp3?raw=true']});
   </script> 
  
   
