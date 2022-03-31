@@ -1,6 +1,6 @@
 # Who Wants To Be A Millionaire?
 A rudimentary prototype of 'Who Wants To Be A Millionaire?' without lifelines.
-Play here: http://cdn.rawgit.com/EncounterQ/WhoWantsToBeAMillionaire/master/millionaire.html
+Play here: https://raw.githack.com/jhodk/WhoWantsToBeAMillionaire/master/millionaire.html
 
 (Best viewed on Chrome)
 
