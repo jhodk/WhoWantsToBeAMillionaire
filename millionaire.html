@@ -214,28 +214,33 @@ div.questionBox span{margin-left:1em;margin-right:1em;margin-top:.5em;font-size:
  <script> 
   var spData = null;
   function doData(json) {
-      spData = json.feed.entry;
+    console.log("received sheets data");
+      spData = json;
    // console.log(spData);
     
     var questions = [];
     var curQuestion = -1;
     for(i=0;i<spData.length;i++){
-      
-      if(i%6==0){
         curQuestion++;
         questions[curQuestion] = new Array(6);
+        colNames = [
+        "question",
+        "answer1",
+        "answer2",
+        "answer3",
+        "answer4",
+        "answer0"];
+        for(var j = 0; j < 6; j++){
+            questions[curQuestion][j] = spData[curQuestion][colNames[j]];
         }
       
-      
-      row = spData[i]['gs$cell']['row']-1;
-      curColumn = spData[i]['gs$cell']['col']-1;
-      cellData = spData[i]['gs$cell']['$t'];
-      
-      questions[curQuestion][curColumn] = cellData;
       
     }
    
     initGame(questions);
+
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("playbtn").style.display = "inline-block";
     
   }
    
@@ -406,6 +411,9 @@ if(currentQuestionLevel==16){return;}
       document.getElementById('info').innerText = 'You just lost ' + amountsLoss[currentQuestionLevel-7] +' and go home with only ' + amountsEnglish[amount] +'!';
  
      }
+
+         document.getElementById("moneybtn").style.display = "none";
+    document.getElementById("restartbtn").style.display = "inline-block";
    }
    
    function takeMoney() {
@@ -420,10 +428,18 @@ if(currentQuestionLevel==16){return;}
      setTimeout(function(){sounds['playertakemoney'].play();},0);
 
      document.getElementById('info').innerText = 'You took the money and went home with ' + amountsEnglish[currentQuestionLevel-1] +'!';
+
+     document.getElementById("moneybtn").style.display="none";
+     document.getElementById("restartbtn").style.display="inline-block";
      
      
      }
      
+   }
+
+   function restartGame(){
+        window.location.reload();
+        //future - just reset variables and sounds
    }
    
    var sounds = [];
@@ -446,17 +462,49 @@ if(currentQuestionLevel==16){return;}
    sounds['newquestionlevel2'] = new Howl({src:['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/before_level_2.mp3?raw=true']});
     sounds['newquestionlevel3'] = new Howl({src:['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/before_level_3.mp3?raw=true']});
    sounds['millionaire'] = new Howl({src:['https://github.com/mathiassmichno/wwtbam/blob/master/sounds/lvl4_correct.mp3?raw=true']});
+
+
+
+
+
   </script> 
  
   
   
-  <script src="https://spreadsheets.google.com/feeds/cells/18tbEhnV0B6nNoPY6gRqUkF6ydgZD0dafZW4Y770BtnI/1/public/values?alt=json-in-script&callback=doData&t=123"></script>
+  <!--<script src="https://spreadsheets.google.com/feeds/cells/18tbEhnV0B6nNoPY6gRqUkF6ydgZD0dafZW4Y770BtnI/1/public/values?alt=json-in-script&callback=doData&t=123"></script> -->
+
+
+  <!--https://sheets.googleapis.com/v4/spreadsheets/{spreadsheetId}/values/{sheetName}!{cellRange}?key={yourAPIKey}-->
+
+<script>
+    
+    //could also use sheetdb dot io
+    var sheetDataUrl = "https://opensheet.elk.sh/18tbEhnV0B6nNoPY6gRqUkF6ydgZD0dafZW4Y770BtnI/Sheet1";
+    callApi(sheetDataUrl);
+
+    async function callApi(url){
+    var response = await fetch(url);
+    var sheetData = await response.json();
+    imp(sheetData);
+    }
+   var results;
+
+
+   
+   function imp(a){
+    results = a;
+    doData(a);
+    
+   }
+</script>
+
 <style></style>
 
 
 <div id='start'>
 
-<button type="button" style="font-size:80px" onclick=startGame()>Play</button>
+<span id = "loading" style="font-size:80px;color:white">Loading questions...</span>
+<button type="button" id="playbtn" style="font-size:80px;display:none" onclick=startGame()>Play</button>
 
 </div>
 <div id='game' style="display:none">
@@ -483,7 +531,8 @@ if(currentQuestionLevel==16){return;}
   <li>£0
   </ul>
   <br>
- <div style="text-align:center"> <span id='info' class = "info"></span><button type="button" onclick=takeMoney() style="width:250px;height:45px;font-size:30px;">Take the money</button></div>
+ <div style="text-align:center"> <span id='info' class = "info"></span><button type="button" onclick=takeMoney() id="moneybtn" style="width:250px;height:45px;font-size:30px;">Take the money</button>
+    <button type="button" onclick=restartGame() id="restartbtn" style="display: none;width:250px;height:45px;font-size:30px;">Restart Game</button></div>
     <div class="line"></div>
   
   <ul class="q quest" style="margin-left:auto;margin-right:auto">
@@ -508,7 +557,6 @@ if(currentQuestionLevel==16){return;}
 </div>  
 </body>
 </html>
-
 
 
 
